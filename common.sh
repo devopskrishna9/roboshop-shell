@@ -94,12 +94,8 @@ LOAD_SCHEMA()
             status_check
 
             print_head "load schema"
-            echo hello world
-
             mysql -h mysql-dev.devopsnew9.online -uroot -p${root_mysql_password} < /app/schema/${component}.sql &>>${LOG}
-            #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql
             status_check
-            echo done
     fi
   fi
   print_head "Configuring the nodejs files"
