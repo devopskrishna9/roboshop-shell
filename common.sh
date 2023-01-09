@@ -100,7 +100,7 @@ LOAD_SCHEMA()
             #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql
             status_check
             echo done
-        fi
+    fi
   fi
   print_head "Configuring the nodejs files"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
