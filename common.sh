@@ -93,21 +93,21 @@ LOAD_SCHEMA()
             status_check
 
             print_head "load schema"
-            mysql -h mysql-dev.devopsnew9.online -uroot -p"${root_mysql_password}" < /app/schema/shipping.sql   &>>${LOG}
+            mysql -h mysql-dev.devopsnew9.online -uroot -p${root_mysql_password} < /app/schema/${component}.sql   &>>${LOG}
             #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql
             status_check
         fi
   fi
-}
-
-Nodejs()
-{
   print_head "Configuring the nodejs files"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
   status_check
 
   print_head "Install Nodejs"
   yum install nodejs -y &>>${LOG}
+}
+
+Nodejs()
+{
   status_check
 
   APP_PREREQ
