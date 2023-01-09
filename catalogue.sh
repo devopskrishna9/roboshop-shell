@@ -1,10 +1,10 @@
 source common.sh
 
-echo -e "\e[31mConfiguring the nodejs files\e[0m"
+print_head "Configuring the nodejs files"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 status_check
 
-echo -e "\e[32mInstall Nodejs\e[0m"
+print_head "Install Nodejs"
 yum install nodejs -y &>>${LOG}
 status_check
 
@@ -15,11 +15,12 @@ rm -rf /app/* &>>${LOG}
 cd /app &>>${LOG}
 unzip /tmp/catalogue.zip &>>${LOG}
 cd /app &>>${LOG}
-echo -e "\e[33mInstall rpm files\e[0m"
+
+print_head "Install rpm files"
 npm install &>>${LOG}
 status_check
 
-echo -e "\e[34mCopying files\e[0m"
+print_head "Copying files"
 cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${LOG}
 
 systemctl daemon-reload &>>${LOG}
@@ -35,6 +36,6 @@ mongo --host mongodb-dev.devopsnew9.online </app/schema/catalogue.js &>>${LOG}
 
 
 systemctl enable catalogue &>>${LOG}
-echo -e "\e[34mRestart the mechine\e[0m"
+print_head "Restart the mechine"
 systemctl restart catalogue &>>${LOG}
 status_check
