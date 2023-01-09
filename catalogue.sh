@@ -1,51 +1,40 @@
-script_location=$(pwd)
-LOG=/tmp/roboshop.log
+source common.sh
 
-status_check()
-{
-  if [ $? -eq 0 ]; then
-   echo SUCCESS
-  else
-    echo -e "\e[31mFAILURE\e[0m"
-    echo "Refer log file for more information, LOG - ${LOG}"
-    exit;
-  fi
-}
 echo -e "\e[31mConfiguring the nodejs files\e[0m"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 status_check
 
 echo -e "\e[32mInstall Nodejs\e[0m"
-yum install nodejs -y
+yum install nodejs -y &>>${LOG}
 status_check
 
-useradd roboshop
-mkdir /app
-curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
-rm -rf /app/*
-cd /app
-unzip /tmp/catalogue.zip
-cd /app
+useradd roboshop &>>${LOG}
+mkdir /app &>>${LOG}
+curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
+rm -rf /app/* &>>${LOG}
+cd /app &>>${LOG}
+unzip /tmp/catalogue.zip &>>${LOG}
+cd /app &>>${LOG}
 echo -e "\e[33mInstall rpm files\e[0m"
-npm install
+npm install &>>${LOG}
 status_check
 
 echo -e "\e[34mCopying files\e[0m"
-cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service
+cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${LOG}
 
-systemctl daemon-reload
+systemctl daemon-reload &>>${LOG}
 status_check
 
-systemctl enable catalogue
-systemctl start catalogue
+systemctl enable catalogue &>>${LOG}
+systemctl start catalogue &>>${LOG}
 
-cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
 
-yum install mongodb-org-shell -y
-mongo --host mongodb-dev.devopsnew9.online </app/schema/catalogue.js
+yum install mongodb-org-shell -y &>>${LOG}
+mongo --host mongodb-dev.devopsnew9.online </app/schema/catalogue.js &>>${LOG}
 
 
-systemctl enable catalogue
+systemctl enable catalogue &>>${LOG}
 echo -e "\e[34mRestart the mechine\e[0m"
-systemctl restart catalogue
+systemctl restart catalogue &>>${LOG}
 status_check
