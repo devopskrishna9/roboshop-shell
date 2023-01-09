@@ -1,5 +1,7 @@
 source common.sh
 
+#component=catalogue
+
 print_head "Configuring the nodejs files"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 status_check
