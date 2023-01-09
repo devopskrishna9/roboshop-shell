@@ -20,6 +20,9 @@ print_head "binding ports inside redis of redis"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf &>>${LOG}
 status_check
 
+# use both at a time also just for eloborate i used seperate sed editor
+# sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf  &>>${LOG}
+
 print_head "Enable the redis"
 systemctl enable redis &>>${LOG}
 status_check
