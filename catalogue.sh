@@ -20,5 +20,3 @@ yum install mongodb-org-shell -y
 mongo --host mongodb-dev.devopsnew9.online </app/schema/catalogue.js
 systemctl enable catalogue
 systemctl start catalogue
-
-
