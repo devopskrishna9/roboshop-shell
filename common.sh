@@ -137,6 +137,8 @@ MAVEN()
   yum install maven -y &>>${LOG}
   status_check
 
+  APP_PREREQ
+
   print_head "build a package"
   mvn clean package &>>${LOG}
   status_check
