@@ -27,12 +27,15 @@ Nodejs()
   yum install nodejs -y &>>${LOG}
   status_check
 
-  print_head "add user roboshop"
-  useradd roboshop &>>${LOG}
+  print_head "add application ${component} roboshop"
+  id roboshop &>>${LOG}
+  if [ $? -ne 0 ]; then
+     useradd roboshop &>>${LOG}
+  fi
   status_check
 
   print_head "make a app dir"
-  mkdir /app &>>${LOG}
+  mkdir -p /app &>>${LOG}
   status_check
 
   print_head "${component} zip file "
