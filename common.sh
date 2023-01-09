@@ -93,7 +93,7 @@ LOAD_SCHEMA()
             status_check
 
             print_head "load schema"
-            mysql -h mysql-dev.devopsnew9.online -uroot ${root_mysql_password} < /app/schema/shipping.sql   &>>${LOG}
+            mysql -h mysql-dev.devopsnew9.online -uroot -p"${root_mysql_password}" < /app/schema/shipping.sql   &>>${LOG}
             #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql
             status_check
         fi
