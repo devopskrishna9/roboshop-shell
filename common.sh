@@ -78,6 +78,7 @@ Nodejs()
   systemctl start ${component} &>>${LOG}
   status_check
 
+if [ ${schema_load} == "true" ]; then
   print_head "copy mongodb repo file"
   cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
   status_check
@@ -88,7 +89,7 @@ Nodejs()
 
   print_head "load schema"
   mongo --host mongodb-dev.devopsnew9.online </app/schema/${component}.js &>>${LOG}
-
+fi
   print_head "again enable ${component}"
   systemctl enable ${component} &>>${LOG}
   status_check
