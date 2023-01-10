@@ -75,6 +75,7 @@ LOAD_SCHEMA()
   if [ ${schema_load} == "true" ]; then
 
     if [ ${schema_type} == "mongo" ]; then
+
         print_head "copy mongodb repo file"
         cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
         status_check
@@ -89,13 +90,14 @@ LOAD_SCHEMA()
 
     if [ ${schema_type} == "mysql" ]; then
 
-            print_head "Install mysql"
-            yum install maven -y &>>${LOG}
-            status_check
+        print_head "Install mysql"
+        yum install maven -y &>>${LOG}
+        status_check
 
-            print_head "load schema"
-            mysql -h mysql-dev.devopsnew9.online -uroot -p${root_mysql_password} < /app/schema/${component}.sql &>>${LOG}
-            status_check
+        print_head "load schema"
+        mysql -h mysql-dev.devopsnew9.online -uroot -p${root_mysql_password} < /app/schema/${component}.sql &>>${LOG}
+        status_check
+
     fi
   fi
   print_head "Configuring the nodejs files"
