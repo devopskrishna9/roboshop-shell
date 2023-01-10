@@ -100,16 +100,17 @@ LOAD_SCHEMA()
 
     fi
   fi
+
+}
+
+Nodejs()
+{
   print_head "Configuring the nodejs files"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
   status_check
 
   print_head "Install Nodejs"
   yum install nodejs -y &>>${LOG}
-}
-
-Nodejs()
-{
   status_check
 
   APP_PREREQ
