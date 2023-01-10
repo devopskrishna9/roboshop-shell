@@ -172,3 +172,28 @@ status_check
 SYSTEMD_SETUP
 
 }
+
+GOLANG(){
+
+print_head "Install golang"
+yum install golang -y
+status_Check
+
+APP_PREREQ
+
+print_head "Download the dependencies"
+cd /app
+go mod init dispatch
+go get
+go build
+status_check
+
+print_head "update password in ${component} service file"
+sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" ${script_location}/files/${component}.service &>>${LOG}
+status_check
+
+SYSTEMD_SETUP
+
+echo SUCCESSFully Completed
+
+}
