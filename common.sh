@@ -176,16 +176,16 @@ SYSTEMD_SETUP
 GOLANG(){
 
 print_head "Install golang"
-yum install golang -y
+yum install golang -y &>>{LOG}
 status_Check
 
 APP_PREREQ
 
 print_head "Download the dependencies"
-cd /app
-go mod init dispatch
-go get
-go build
+cd /app &>>{LOG}
+go mod init dispatch &>>{LOG}
+go get &>>{LOG}
+go build &>>{LOG}
 status_check
 
 print_head "update password in ${component} service file"
