@@ -167,6 +167,8 @@ status_check
 
 print_head "update password in ${component} service file"
 sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}" files/${component} &>>${LOG}
+status_check
+
 SYSTEMD_SETUP
 
 }
