@@ -36,3 +36,5 @@ status_check
 print_head "reStart mysql"
 systemctl restart mysqld &>>${LOG}
 status_check
+
+echo Successfully installed mysql
