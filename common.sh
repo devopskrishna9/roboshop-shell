@@ -94,10 +94,13 @@ LOAD_SCHEMA()
         yum install maven -y &>>${LOG}
         status_check
 
-        print_head "load schema"
-        mysql --host mysql-dev.devopsnew9.online & mysql -uroot -p${root_mysql_password} < /app/schema/${component}.sql &>>${LOG}
-        status_check
-
+        print_head "check the password"
+        mysql -uroot -p${root_mysql_password}
+        if [  $? -ne 0 ]; then
+          print_head "load schema"
+          mysql --host mysql-dev.devopsnew9.online -uroot -p${root_mysql_password} < /app/schema/${component}.sql &>>${LOG}
+          status_check
+        fi
     fi
   fi
   print_head "Configuring the nodejs files"
