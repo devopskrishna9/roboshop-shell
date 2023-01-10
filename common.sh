@@ -91,7 +91,7 @@ LOAD_SCHEMA()
     if [ ${schema_type} == "mysql" ]; then
 
         print_head "Install mysql"
-        yum install mysql-client &>>${LOG}
+        yum install mysql -y &>>${LOG}
         status_check
 
           print_head "load schema"
