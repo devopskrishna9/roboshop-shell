@@ -95,7 +95,7 @@ LOAD_SCHEMA()
         status_check
 
         print_head "load schema"
-        mysql -h mysql-dev.devopsnew9.online -uroot -p${root_mysql_password} < /app/schema/${component}.sql &>>${LOG}
+        mysql --host mysql-dev.devopsnew9.online & mysql -uroot -p${root_mysql_password} < /app/schema/${component}.sql &>>${LOG}
         status_check
 
     fi
