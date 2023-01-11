@@ -31,7 +31,7 @@ if [ -z "${root_mysql_password}" ]; then
      mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
    status_check
 else
-   echo root password already reset
+   echo ROOT PASSWORD is "ROOT password already reset"
 fi
 
 print_head "check the new password"
