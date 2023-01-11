@@ -25,13 +25,16 @@ print_head "Start MySQL"
 systemctl start mysqld &>>${LOG}
 status_check
 
-print_head "Reset Default Database Password"
-mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
-status_check
-
-print_head "check the new password"
-mysql -uroot -p${root_mysql_password} &>>${LOG}
-status_check
+print_head "check whether the password is set or not"
+if [ -z "${root_mysql_password}" ]; then
+   print_head "Reset Default Database Password"
+     mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
+   status_check
+else
+   print_head "check the new password"
+   mysql -uroot -p${root_mysql_password} &>>${LOG}
+   status_check
+fi
 
 print_head "Start MySQL"
 systemctl restart mysqld &>>${LOG}
