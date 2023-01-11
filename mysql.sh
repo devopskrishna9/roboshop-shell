@@ -31,10 +31,12 @@ if [ -z "${root_mysql_password}" ]; then
      mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
    status_check
 else
-   print_head "check the new password"
-   mysql -uroot -p${root_mysql_password} &>>${LOG}
-   status_check
+   echo root password already reset
 fi
+
+print_head "check the new password"
+mysql -uroot -p${root_mysql_password} &>>${LOG}
+status_check
 
 print_head "Start MySQL"
 systemctl restart mysqld &>>${LOG}
