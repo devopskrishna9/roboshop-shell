@@ -34,6 +34,10 @@ else
    echo ROOT PASSWORD is "ROOT password already reset"
 fi
 
+# if [ $? -eq 0 ]; then
+#     echo "password already changed"
+#  fi
+
 print_head "check the new password"
 mysql -uroot -p${root_mysql_password} &>>${LOG}
 status_check
